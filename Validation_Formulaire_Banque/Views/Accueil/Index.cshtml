@@ -10,7 +10,7 @@
         <!-- Formulaire avec compte existant -->
         <div class="col-sm-6">
             <h2 class="text-center">Compte existant</h2>
-            <form asp-action="Connecter" method="post" class="needs-validation" novalidate>
+            <form  asp-action="Connecter" method="post" class="needs-validation" novalidate>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="mb-3">
@@ -53,6 +53,7 @@
                         <div class="mb-3">
                             <label asp-for="DateNaissance" class="form-label"></label>
                             <input asp-for="DateNaissance" class="form-control" type="date" required />
+                            <span asp-validation-for="DateNaissance" class="text-danger"></span>
                         </div>
                     </div>
 
@@ -114,37 +115,4 @@
     </div> <!-- Fin de la rangée contenant les 2 formulaires -->
 </div> <!-- Fin container contenant le mainSection (2 formulaires) -->
 
-<section id="sectionListeComptes">
-    <h2 class="text-center">Liste des comptes</h2>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Date de naissance</th>
-                <th>Téléphone</th>
-                <th>Adresse</th>
-                <th>Code Postal</th>
-                <th>Employeur</th>
-                <th>Salaire</th>
-                <th>Dépôt Initial</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var compte in ViewBag.ListeComptesClients)
-            {
-                <tr>
-                    <td>@compte.Nom</td>
-                    <td>@compte.Prenom</td>
-                    <td>@compte.DateNaissance.ToShortDateString()</td>
-                    <td>@compte.Telephone</td>
-                    <td>@compte.Adresse</td>
-                    <td>@compte.CodePostal</td>
-                    <td>@compte.Employeur</td>
-                    <td>@compte.Salaire.ToString("C")</td>
-                    <td>@compte.DepotInitial.ToString("C")</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</section>
+

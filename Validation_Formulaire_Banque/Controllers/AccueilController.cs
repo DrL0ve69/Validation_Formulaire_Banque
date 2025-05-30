@@ -9,7 +9,6 @@ public class AccueilController : Controller
     public List<CompteClient> ListeComptesClients => DB_ComptesClients.ListeComptesClients;
     public IActionResult Index()
     {
-        ViewBag.ListeComptesClients = ListeComptesClients;
         return View();
     }
 
