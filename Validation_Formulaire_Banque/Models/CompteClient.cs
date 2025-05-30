@@ -10,7 +10,7 @@ public class CompteClient : IValidatableObject
     public int NumCompte = _numCompte++;
 
     [Required(ErrorMessage =
-    "Le champ Nom doit commencer par une majuscule et contenir uniquement des lettres.")]
+    "Le champ Nom ne peut pas être vide.")]
     [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$", ErrorMessage =
     "Le champ Nom doit commencer par une majuscule et contenir uniquement des lettres.")]
     public string Nom { get; set; }
@@ -25,15 +25,22 @@ public class CompteClient : IValidatableObject
     public DateOnly DateNaissance { get; set; }
 
     [Display(Name = "Téléphone")]
+    [Required(ErrorMessage = "Le champ téléphone ne peut pas être vide")]
     public string Telephone { get; set; }
+    [Required(ErrorMessage = "Le champ adresse ne peut pas être vide")]
     public string Adresse { get; set; }
 
     [Display(Name = "Code postal")]
+    [Required(ErrorMessage = "Le champ ne peut pas être vide ne peut pas être vide")]
     public string CodePostal { get; set; }
+    [Required(ErrorMessage ="Le champ employeur ne peut pas être vide")]
     public string Employeur { get; set; }
+    [Range(1, double.MaxValue, ErrorMessage = "Entrez vôtre salaire avec virgule si décimal, doit être plus grand que 1")]
     public decimal Salaire { get; set; }
 
     [Display(Name = "Dépôt Initial")]
+    [Range(0, double.MaxValue, ErrorMessage = "Entrer un dépôt initial avec virgule si décimal. Si nul, entrez 0")]
+    [Required(ErrorMessage = "Si nul, entrez 0")]
     public decimal DepotInitial { get; set; }
     public CompteClient() {  }
     public CompteClient(string nom, string prenom, DateOnly dateNaissance,string telephone, string adresse, string codePostal, string employeur, decimal salaire, decimal depotInitial)
