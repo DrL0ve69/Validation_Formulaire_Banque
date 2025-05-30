@@ -6,7 +6,7 @@ namespace Validation_Formulaire_Banque.Controllers;
 
 public class AccueilController : Controller
 {
-    public List<CompteClient> ListeComptesClients => DB_ComptesClients.ListeComptesClients;
+    public List<CompteClient> ListeComptesClients = DB_ComptesClients.ListeComptesClients;
     public IActionResult Index()
     {
         return View();
@@ -19,6 +19,7 @@ public class AccueilController : Controller
         {
             // Ajouter le nouveau compte à la base de données
             DB_ComptesClients.AjouterCompte(nouveauCompte);
+
             return RedirectToAction("Details",nouveauCompte);
         }
         // Si le modèle n'est pas valide, retourner à la vue avec les erreurs

@@ -4,8 +4,7 @@ namespace Validation_Formulaire_Banque.Models;
 
 public class CompteClient : IValidatableObject
 {
-    private List<ValidationResult> _validationResults = new List<ValidationResult>();
-
+    public List<ValidationResult> ValidationResults = new List<ValidationResult>();
     private static int _numCompte = 1000;
     public int NumCompte = _numCompte++;
 
@@ -20,9 +19,22 @@ public class CompteClient : IValidatableObject
     "Le champ Prénom doit commencer par une majuscule et contenir uniquement des lettres.")]
     [Display(Name = "Prénom")]
     public string Prenom { get; set; }
+
+    private DateOnly _dateOnly;
     [Display(Name = "Date de naissance")]
     [Required(ErrorMessage = "Vous devez indiquer vôtre date de naissance")]
-    public DateOnly DateNaissance { get; set; }
+    public DateOnly DateNaissance 
+    {
+        get => _dateOnly;
+        set 
+        {
+            if (DateOnly.FromDateTime(DateTime.UtcNow).Year - value.Year >= 18)
+            {
+                _dateOnly = value;
+            }
+            else ValidationResults.Add(new("Vous devez avoir 18 ans pour créer un compte", ["DateNaissance"]));
+        }
+    }
 
     [Display(Name = "Téléphone")]
     [Required(ErrorMessage = "Le champ téléphone ne peut pas être vide")]
@@ -42,10 +54,10 @@ public class CompteClient : IValidatableObject
     [Range(0, double.MaxValue, ErrorMessage = "Entrer un dépôt initial avec virgule si décimal. Si nul, entrez 0")]
     [Required(ErrorMessage = "Si nul, entrez 0")]
     public decimal DepotInitial { get; set; }
-    public CompteClient() {  }
+
+    public CompteClient() { }
     public CompteClient(string nom, string prenom, DateOnly dateNaissance,string telephone, string adresse, string codePostal, string employeur, decimal salaire, decimal depotInitial)
     {
-        
         Nom = nom;
         Prenom = prenom;
         DateNaissance = dateNaissance;
@@ -56,9 +68,8 @@ public class CompteClient : IValidatableObject
         Salaire = salaire;
         DepotInitial = depotInitial;
     }
-
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        return _validationResults;
+        return ValidationResults;
     }
 }
