@@ -1,0 +1,33 @@
+﻿@model CompteClient
+<h1 class="text-center">Page Details</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="text-center">Informations du compte</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Numéro compte</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Date de Naissance</th>
+                        <th>Téléphone</th>
+                        <th>Adresse</th>
+                        <th>Code Postal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.NumCompte</td>
+                        <td>@Model.Nom</td>
+                        <td>@Model.Prenom</td>
+                        <td>@Model.DateNaissance.ToString("dd/MM/yyyy")</td>
+                        <td>@Model.Telephone</td>
+                        <td>@Model.Adresse</td>
+                        <td>@Model.CodePostal</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

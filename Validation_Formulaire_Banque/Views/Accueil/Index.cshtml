@@ -1,0 +1,150 @@
+﻿@model CompteClient
+@{
+    ViewData["Title"] = "Accueil";
+}
+<h1 class="text-center">@ViewBag.Title</h1>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Formulaire avec compte existant -->
+        <div class="col-sm-6">
+            <h2 class="text-center">Compte existant</h2>
+            <form asp-action="Connecter" method="post" class="needs-validation" novalidate>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label asp-for="NumCompte" class="form-label"></label>
+                            <input asp-for="NumCompte" class="form-control" required />
+                            <span asp-validation-for="NumCompte" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Se connecter</button>
+            </form>
+        </div>
+
+        <!-- Formulaire pour un nouveau compte -->
+        <div class="col-sm-6">
+            <h2 class="text-center">Créer un nouveau compte</h2>
+            <form asp-action="Create" method="post" class="needs-validation" novalidate>
+
+                <!-- Row nom&prénom -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label asp-for="Nom" class="form-label"></label>
+                            <input asp-for="Nom" class="form-control" required />
+                            <span asp-validation-for="Nom" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label asp-for="Prenom" class="form-label"></label>
+                            <input asp-for="Prenom" class="form-control" required />
+                            <span asp-validation-for="Prenom" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row dateNaissance + Téléphone / Adresse + CodePostal -->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label asp-for="DateNaissance" class="form-label"></label>
+                            <input asp-for="DateNaissance" class="form-control" type="date" required />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label asp-for="Telephone" class="form-label"></label>
+                            <input asp-for="Telephone" class="form-control" required />
+                            <span asp-validation-for="Telephone" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label asp-for="Adresse" class="form-label"></label>
+                            <input asp-for="Adresse" class="form-control" required />
+                            <span asp-validation-for="Adresse" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label asp-for="CodePostal" class="form-label"></label>
+                            <input asp-for="CodePostal" class="form-control" required />
+                            <span asp-validation-for="CodePostal" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label asp-for="Employeur" class="form-label"></label>
+                            <input asp-for="Employeur" class="form-control" required />
+                            <span asp-validation-for="Employeur" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label asp-for="Salaire" class="form-label"></label>
+                            <input asp-for="Salaire" class="form-control" required />
+                            <span asp-validation-for="Salaire" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mb-3">
+                    <label asp-for="DepotInitial" class="form-label"></label>
+                    <input asp-for="DepotInitial" class="form-control" required />
+                    <span asp-validation-for="DepotInitial" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex">
+                    <button type="submit" class="btn btn-primary w-100 mx-2">Créer le compte</button>
+                    <button type="reset" class="btn btn-secondary w-100 mx-2">Reset</button>
+                </div>
+
+            </form>
+        </div> <!-- Fin formulaire nouveau compte -->
+    </div> <!-- Fin de la rangée contenant les 2 formulaires -->
+</div> <!-- Fin container contenant le mainSection (2 formulaires) -->
+
+<section id="sectionListeComptes">
+    <h2 class="text-center">Liste des comptes</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de naissance</th>
+                <th>Téléphone</th>
+                <th>Adresse</th>
+                <th>Code Postal</th>
+                <th>Employeur</th>
+                <th>Salaire</th>
+                <th>Dépôt Initial</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var compte in ViewBag.ListeComptesClients)
+            {
+                <tr>
+                    <td>@compte.Nom</td>
+                    <td>@compte.Prenom</td>
+                    <td>@compte.DateNaissance.ToShortDateString()</td>
+                    <td>@compte.Telephone</td>
+                    <td>@compte.Adresse</td>
+                    <td>@compte.CodePostal</td>
+                    <td>@compte.Employeur</td>
+                    <td>@compte.Salaire.ToString("C")</td>
+                    <td>@compte.DepotInitial.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
