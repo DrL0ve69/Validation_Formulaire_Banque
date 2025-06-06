@@ -10,6 +10,12 @@ public class CompteClient : IValidatableObject
 
     /*
      *     [EmailAddress(ErrorMessage = "Doit avoir le format email conventionnel.")]
+     *     
+     *     [DisplayFormat(DataFormatString = "{0:c}")]
+     *     [DataType(DataType.Currency)]
+     *     
+     *     [DisplayFormat(DataFormatString = "{0:d}")]
+     *     [DataType(DataType.Date)]
      */
 
     [Required(ErrorMessage =
