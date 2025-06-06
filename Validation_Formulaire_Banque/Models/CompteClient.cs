@@ -8,7 +8,15 @@ public class CompteClient : IValidatableObject
     private static int _numCompte = 1000;
     public int NumCompte = _numCompte++;
 
-    
+    private Enums.Enums.EtatsMonde _etatMonde;
+    public Enums.Enums.EtatsMonde EtatMonde 
+    {
+        get => _etatMonde;
+        set 
+        {
+            _etatMonde = value;
+        }
+    }
     //public Enums.Enums.Regions RegionsQuebec {  get; set; }
     /*
      *     [EmailAddress(ErrorMessage = "Doit avoir le format email conventionnel.")]
@@ -62,13 +70,14 @@ public class CompteClient : IValidatableObject
     public string CodePostal { get; set; }
     [Required(ErrorMessage ="Le champ employeur ne peut pas être vide")]
     [StringLength(7,ErrorMessage ="Incluant un espace, le champ code postal ne peut pas être plus long que 7")]
+    
     public string Employeur { get; set; }
     [Range(1, double.MaxValue, ErrorMessage = "Entrez vôtre salaire avec virgule si décimal, doit être plus grand que 1")]
     public decimal? Salaire { get; set; }
 
     [Display(Name = "Dépôt Initial")]
     [Range(0, double.MaxValue, ErrorMessage = "Entrer un dépôt initial avec virgule si décimal. Si nul, entrez 0")]
-    [DataType(DataType.Currency)]
+    [DataType(DataType.Currency, ErrorMessage = "Erreur dans le type d'entrée")]
     [Required(ErrorMessage = "Si nul, entrez 0")]
     public decimal? DepotInitial { get; set; }
     /*

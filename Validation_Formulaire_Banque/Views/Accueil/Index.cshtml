@@ -114,5 +114,9 @@
         </div> <!-- Fin formulaire nouveau compte -->
     </div> <!-- Fin de la rangée contenant les 2 formulaires -->
 </div> <!-- Fin container contenant le mainSection (2 formulaires) -->
-
-
+<!-- Pour la validation Jquery-->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
