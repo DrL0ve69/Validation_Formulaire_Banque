@@ -8,6 +8,10 @@ public class CompteClient : IValidatableObject
     private static int _numCompte = 1000;
     public int NumCompte = _numCompte++;
 
+    /*
+     *     [EmailAddress(ErrorMessage = "Doit avoir le format email conventionnel.")]
+     */
+
     [Required(ErrorMessage =
     "Le champ Nom ne peut pas être vide.")]
     [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$", ErrorMessage =
@@ -38,7 +42,10 @@ public class CompteClient : IValidatableObject
 
     [Display(Name = "Téléphone")]
     [Required(ErrorMessage = "Le champ téléphone ne peut pas être vide")]
+    [Phone(ErrorMessage ="Doit convenir au format téléphone")]
     public string Telephone { get; set; }
+
+
     [Required(ErrorMessage = "Le champ adresse ne peut pas être vide")]
     public string Adresse { get; set; }
 
@@ -46,6 +53,7 @@ public class CompteClient : IValidatableObject
     [Required(ErrorMessage = "Le champ ne peut pas être vide ne peut pas être vide")]
     public string CodePostal { get; set; }
     [Required(ErrorMessage ="Le champ employeur ne peut pas être vide")]
+    [StringLength(7,ErrorMessage ="Incluant un espace, le champ code postal ne peut pas être plus long que 7")]
     public string Employeur { get; set; }
     [Range(1, double.MaxValue, ErrorMessage = "Entrez vôtre salaire avec virgule si décimal, doit être plus grand que 1")]
     public decimal Salaire { get; set; }
