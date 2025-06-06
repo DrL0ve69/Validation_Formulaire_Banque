@@ -70,7 +70,7 @@ public class CompteClient : IValidatableObject
     [Range(0, double.MaxValue, ErrorMessage = "Entrer un dépôt initial avec virgule si décimal. Si nul, entrez 0")]
     [DataType(DataType.Currency)]
     [Required(ErrorMessage = "Si nul, entrez 0")]
-    public decimal DepotInitial { get; set; }
+    public decimal? DepotInitial { get; set; }
     /*
     public CompteClient() { }
     */
