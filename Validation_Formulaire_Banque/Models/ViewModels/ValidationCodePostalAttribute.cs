@@ -3,18 +3,19 @@ using System.Web.Mvc;
 
 namespace Validation_Formulaire_Banque.Models.ViewModels;
 
-public class ValidationDepotAttribute : ValidationAttribute, IClientValidatable
+public class ValidationCodePostalAttribute : ValidationAttribute, IClientValidatable
 {
     public override bool IsValid(object value)
     {
         if (value == null) return true; // Laisse Required s’en charger
-        return (decimal)value >= 0;
+        var str = value.ToString();
+        return str.Count() <= 7;
     }
     public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
     {
         yield return new ModelClientValidationRule
         {
-            ValidationType = "validationdepotvalide",
+            ValidationType = "validationcodepostal",
             ErrorMessage = FormatErrorMessage(metadata.DisplayName)
 
         };

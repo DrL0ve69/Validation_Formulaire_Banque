@@ -1,2 +1,10 @@
 ﻿<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    $.validator.addMethod("validationcodepostal", function (value, element) {
+        return /^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ] *\d[ABCEGHJKLMNPRSTVWXYZ]\d$/i.test( value ).test(value);
+    }, "Format du code postal invalide");
+
+    $.validator.unobtrusive.adapters.addBool("validationcodepostal");
+</script>

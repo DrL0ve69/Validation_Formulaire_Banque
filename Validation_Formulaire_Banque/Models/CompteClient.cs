@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Validation_Formulaire_Banque.Models.ViewModels;
 
 namespace Validation_Formulaire_Banque.Models;
 
@@ -67,10 +68,11 @@ public class CompteClient : IValidatableObject
 
     [Display(Name = "Code postal")]
     [Required(ErrorMessage = "Le champ ne peut pas être vide ne peut pas être vide")]
+    [ValidationCodePostal]
     public string CodePostal { get; set; }
+
+
     [Required(ErrorMessage ="Le champ employeur ne peut pas être vide")]
-    [StringLength(7,ErrorMessage ="Incluant un espace, le champ code postal ne peut pas être plus long que 7")]
-    
     public string Employeur { get; set; }
     [Range(1, double.MaxValue, ErrorMessage = "Entrez vôtre salaire avec virgule si décimal, doit être plus grand que 1")]
     public decimal? Salaire { get; set; }
